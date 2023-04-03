@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'marketbackend',
         'USER': 'market_admin',
-        'PASSWORD': 'trytoguessthis',
+        'PASSWORD': 'password',
         'HOST': 'localhost'
     }
 }
