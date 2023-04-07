@@ -1,14 +1,14 @@
-from django.urls import path, re_path
-from django.contrib.auth.views import LogoutView
-from .views import SignupView, UserProfileView, UserLoginView
-from django.views.generic import TemplateView
+from django.urls import path, include
+from rest_framework import routers
+from .views import ProfileViewSet, CreateUserView, CustomAuthToken, CurrentUserView
 
+router = routers.DefaultRouter()
+router.register(r'profiles', ProfileViewSet)
 
 urlpatterns = [
-    path('register/', SignupView.as_view(), name='register'),
-    path('login/', UserLoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('profile/', UserProfileView.as_view(), name='profile'),
+    path('api/', include(router.urls)),
+    path('api/accounts/register/', CreateUserView.as_view()),
+    path('api/accounts/login/', CustomAuthToken.as_view()),
+    path('api/accounts/current/', CurrentUserView.as_view()),
 ]
 
-# urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]

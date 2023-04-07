@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-6ipc%d%0a4bv7*i)9dlfsk%c^j0wej$1qfi!zqv7o9q)7#9gp=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
+    'rest_framework.authtoken',
     'rest_framework',
+    'corsheaders',
+    'storages',
     'accounts',
     'products'
 ]
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'marketbackend.urls'
@@ -73,6 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'marketbackend.wsgi.application'
 
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -129,17 +133,16 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'profile'
-LOGOUT_REDIRECT_URL = 'login'
+# LOGIN_REDIRECT_URL = 'profile'
+# LOGOUT_REDIRECT_URL = 'login'
 
 REST_FRAMEWORK = {
-        'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
     ],
 }
 
-ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.1']
+CORS_ORIGIN_ALLOW_ALL = True
+
+
