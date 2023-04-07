@@ -1,22 +1,17 @@
-from django.urls import include, path
-from rest_framework import routers
-from django.contrib.auth.views import LoginView, LogoutView
-from rest_framework.authtoken.views import obtain_auth_token
-from accounts.views import HomeRedirectView, CustomUserViewSet, ProfileViewSet
-from accounts import views
-from django.views.decorators.csrf import csrf_exempt
+from django.urls import path, include, re_path
+from django.contrib import admin
+from django.views.generic import TemplateView
 
 
-router = routers.DefaultRouter()
-router.register(r'users', views.CustomUserViewSet)
-router.register(r'profiles', views.ProfileViewSet)
 
 urlpatterns = [
-
-    path('', include(router.urls)),
-    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
-    path('api-token-auth/', obtain_auth_token, name='api-token-auth'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('profile/', ProfileViewSet.as_view({'get': 'my_profile'}), name='profile'),
-    path('signup/', CustomUserViewSet.as_view({'post': 'signup'}), name='signup'),
+    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('admin/', admin.site.urls),
+    # path('api_auth/', include('rest_framework.urls')),
+    # path('profile/', include('user_profile.urls'))
 ]
+
+
+
+urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
