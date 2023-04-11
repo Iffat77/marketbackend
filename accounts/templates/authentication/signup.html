@@ -1,9 +1,0 @@
-{% extends "authentication/base.html" %}
-
-{% block content %}
-  <form method="post" action="{% url 'my_view' %}">
-    {% csrf_token %}
-    <!-- your form fields here -->
-    <button type="submit">Submit</button>
-  </form>
-{% endblock %}
