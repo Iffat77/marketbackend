@@ -21,7 +21,6 @@ class CreateUserView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             profile = Profile.objects.create(user=user)
-            # You can add more fields to the profile object as needed
             token = TokenObtainPairView.as_view()(request=request._request).data
             return Response({'token': token['access']}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
