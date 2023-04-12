@@ -4,18 +4,30 @@ from django.core.validators import MaxValueValidator
 
 
 class Category(models.Model):
+    ELECTRONICS = 'electronics'
+    BOOKS = 'books'
+    CLOTHING = 'clothing'
+    HOME = 'home'
+    COLLECTIBLES = 'collectibles'
+    SPORTING_GOODS = 'sporting_goods'
+
     CATEGORY_CHOICES = [
         ('electronics', 'Electronics'),
         ('books', 'Books'),
         ('clothing', 'Clothing'),
         ('home', 'Home'),
         ('collectibles', 'Collectibles'),
+        ('sporting_goods', 'Sporting Goods'), 
     ]
 
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES,
+        default=ELECTRONICS,
+    )
+
     def __str__(self):
         return self.category
-    
 class Product(models.Model):
     name = models.CharField(max_length=256)
     description = models.TextField(max_length=2000)
