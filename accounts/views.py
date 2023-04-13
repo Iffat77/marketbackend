@@ -8,8 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 class ProfileViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JWTAuthentication]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
@@ -29,8 +29,8 @@ class LoginView(TokenObtainPairView):
     pass
 
 class CurrentUserView(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         user = request.user
