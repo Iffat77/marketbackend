@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('market/', include(router.urls)),
     path('admin/', admin.site.urls),
+     path('market/', include('cart.urls')),
 ]
 
 # /market/products/?seller_id to products listed by a specific seller
